@@ -1,0 +1,60 @@
+/* games/flappy-clone/style.css */
+body {
+    font-family: 'Orbitron', sans-serif;
+    background-color: #0d1117; 
+    color: #00ffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    flex-direction: column;
+}
+
+.game-wrapper {
+    text-align: center;
+    background: #161b22;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+}
+
+.header-status h1 {
+    font-size: 1.5em;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.header-status p {
+    font-size: 0.8em;
+    color: #ff00ff;
+    margin-bottom: 15px;
+}
+
+#gameCanvas {
+    display: block;
+    border: 3px solid #ff00ff; /* Border Neon Magenta */
+    background-color: #273453; /* Latar belakang langit/game */
+    margin: 10px auto;
+}
+
+.message-box {
+    color: #00ffff;
+    font-weight: 700;
+    font-size: 1.2em;
+    padding: 10px;
+    margin-top: 15px;
+}
+
+.back-btn {
+    color: #e6edf3;
+    text-decoration: none;
+    font-size: 0.8em;
+    display: block;
+    margin-top: 20px;
+    transition: color 0.3s;
+}
+
+.back-btn:hover {
+    color: #ff00ff;
+}
