@@ -9,9 +9,9 @@
 
 /* Tema Gaming & Dark Mode */
 body {
-    font-family: 'Orbitron', sans-serif; /* Font utama yang modern */
-    background-color: #0d1117; /* Latar Belakang Gelap (Mirip GitHub Dark Mode) */
-    color: #e6edf3; /* Warna Teks Terang */
+    font-family: 'Orbitron', sans-serif; 
+    background-color: #0d1117; 
+    color: #e6edf3; 
     line-height: 1.6;
     scroll-behavior: smooth;
 }
@@ -24,7 +24,7 @@ body {
 
 .section {
     padding: 100px 0;
-    min-height: 100vh; /* Agar setiap section full-height saat dilihat */
+    min-height: 100vh;
 }
 
 /* --- HEADER & NAVIGASI (EXP BAR) --- */
@@ -33,10 +33,10 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    background: rgba(13, 17, 23, 0.95); /* Semi-transparan */
+    background: rgba(13, 17, 23, 0.95);
     padding: 15px 0;
     z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0, 255, 255, 0.2); /* Neon Shadow Tipis */
+    box-shadow: 0 2px 5px rgba(0, 255, 255, 0.2); 
 }
 
 .header-nav .container {
@@ -46,9 +46,9 @@ body {
 }
 
 .logo {
-    font-family: 'Press Start 2P', cursive; /* Font pixel untuk logo */
+    font-family: 'Press Start 2P', cursive;
     font-size: 14px;
-    color: #00ffff; /* Warna Neon Cyan */
+    color: #00ffff;
 }
 
 .header-nav a {
@@ -71,7 +71,7 @@ body {
 .exp-label {
     font-size: 12px;
     margin-right: 5px;
-    color: #ff00ff; /* Warna Neon Magenta */
+    color: #ff00ff;
 }
 
 .exp-bar {
@@ -85,9 +85,9 @@ body {
 
 .exp-progress {
     height: 100%;
-    width: 0%; /* Dimulai dari 0% - akan diisi oleh JS */
+    width: 0%; 
     background: linear-gradient(90deg, #ff00ff, #00ffff);
-    transition: width 0.1s ease-out; /* Animasi progress bar */
+    transition: width 0.1s ease-out;
 }
 
 
@@ -98,10 +98,9 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
-    /* Placeholder untuk Parallax: Gunakan gambar background bertema luar angkasa/sci-fi */
-    background-image: url('assets/images/bg-parallax.jpg'); 
+    background-image: url('../images/bg-parallax.jpg'); 
     background-size: cover;
-    background-attachment: fixed; /* Ini Kunci Dasar Parallax */
+    background-attachment: fixed;
     background-position: center;
 }
 
@@ -135,6 +134,7 @@ body {
     font-weight: 700;
     cursor: pointer;
     transition: background 0.3s, box-shadow 0.3s;
+    display: inline-block;
 }
 
 .btn-quest:hover {
@@ -167,15 +167,13 @@ body {
     overflow: hidden;
     cursor: pointer;
     transition: transform 0.3s, box-shadow 0.3s;
-    
-    /* Setting untuk Efek 3D Ringan */
     transform-style: preserve-3d;
 }
 
 /* Efek Hover Keren (3D Ringan) */
 .project-card:hover {
-    transform: perspective(1000px) rotateY(5deg) scale(1.05); /* Rotasi dan Zoom */
-    box-shadow: 0 10px 20px rgba(0, 255, 255, 0.4); /* Neon Shadow Saat Hover */
+    transform: perspective(1000px) rotateY(5deg) scale(1.05); 
+    box-shadow: 0 10px 20px rgba(0, 255, 255, 0.4); 
 }
 
 .project-card img {
@@ -237,4 +235,104 @@ body {
     color: #e6edf3;
     border-radius: 5px;
     font-family: 'Orbitron', sans-serif;
+}
+
+/* --- MODAL POP-UP STYLING --- */
+
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 2000; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.85); 
+    backdrop-filter: blur(5px);
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+    background-color: #161b22;
+    margin: 5% auto;
+    padding: 30px;
+    border: 3px solid #00ffff; 
+    width: 80%;
+    max-width: 700px;
+    border-radius: 10px;
+    position: relative;
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.6);
+    animation: slideIn 0.4s ease-out;
+}
+
+.close-btn {
+    color: #00ffff;
+    font-size: 30px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: #ff00ff;
+}
+
+.modal-title {
+    font-size: 2em;
+    color: #ff00ff;
+    margin-bottom: 15px;
+    font-family: 'Press Start 2P', cursive;
+}
+
+.modal-description {
+    margin-bottom: 25px;
+}
+
+.modal-details {
+    padding: 15px;
+    border-left: 3px solid #00ffff;
+    margin-bottom: 25px;
+    background-color: #0d1117;
+}
+
+.modal-details h4 {
+    margin-bottom: 10px;
+    color: #00ffff;
+}
+
+#modal-tech-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+#modal-tech-list li {
+    background: #1a202c;
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 5px 5px 0 0;
+    border-radius: 5px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9em;
+}
+
+.modal-btn {
+    display: block;
+    text-align: center;
+    margin-top: 30px;
+}
+
+/* Animasi untuk Modal */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
 }
