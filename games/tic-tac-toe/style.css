@@ -1,7 +1,7 @@
 /* games/tic-tac-toe/style.css */
 body {
-    font-family: 'Press Start 2P', cursive;
-    background-color: #1a1a2e; /* Dark theme for game */
+    font-family: 'Orbitron', sans-serif; /* Menggunakan Orbitron */
+    background-color: #1a1a2e; 
     color: #e94560;
     display: flex;
     justify-content: center;
@@ -21,6 +21,7 @@ body {
 
 h1 {
     font-size: 1.5em;
+    font-weight: 700; /* Tebal untuk judul game */
     margin-bottom: 20px;
     color: #00ffff;
 }
@@ -28,6 +29,7 @@ h1 {
 .status-message {
     margin-bottom: 20px;
     font-size: 0.8em;
+    font-weight: 500;
 }
 
 .board {
@@ -45,6 +47,7 @@ h1 {
     justify-content: center;
     align-items: center;
     font-size: 3em;
+    font-weight: 900; /* Sangat tebal untuk X/O */
     cursor: pointer;
     transition: background-color 0.2s;
     user-select: none;
@@ -60,7 +63,8 @@ h1 {
     background-color: #e94560;
     color: white;
     border: none;
-    font-family: 'Press Start 2P', cursive;
+    font-family: 'Orbitron', sans-serif; /* Menggunakan Orbitron */
+    font-weight: 700;
     cursor: pointer;
     margin-bottom: 15px;
 }
@@ -69,4 +73,5 @@ h1 {
     color: #00ffff;
     text-decoration: none;
     font-size: 0.7em;
+    font-weight: 500;
 }
