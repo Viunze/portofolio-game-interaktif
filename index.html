@@ -3,98 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>[Vinzee] - Game Dev Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Portofolio Game Interaktif - [Vinzee]</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* Menggunakan font Orbitron sebagai default */
+        body { font-family: 'Orbitron', sans-serif; background-color: #0d1117; color: #e6edf3; }
+        .neon-text { color: #00ffff; text-shadow: 0 0 5px #00ffff, 0 0 10px rgba(0, 255, 255, 0.5); }
+        .neon-border { border-color: #ff00ff; box-shadow: 0 0 15px rgba(255, 0, 255, 0.5); }
+        .project-card { transition: transform 0.3s, box-shadow 0.3s; }
+        .project-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0, 255, 255, 0.4); }
+        .btn-quest {
+            background: linear-gradient(90deg, #ff00ff, #00ffff);
+            color: #0d1117;
+            text-decoration: none;
+            border: none;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+        }
+        .btn-quest:hover { background: linear-gradient(90deg, #00ffff, #ff00ff); box-shadow: 0 0 15px rgba(0, 255, 255, 0.8); }
+    </style>
 </head>
-<body>
+<body class="p-4 md:p-8">
 
-    <header class="header-nav">
-        <div class="container">
-            <h1 class="logo">DEV: [Vinzee]</h1>
-            <nav>
-                <a href="#hero">Home</a>
-                <a href="#projects">Quest Log</a>
-                <a href="#contact">Final Boss</a>
-            </nav>
-            <div class="exp-bar-container">
-                <span class="exp-label">EXP:</span>
-                <div class="exp-bar">
-                    <div id="progress-bar" class="exp-progress"></div>
-                </div>
-            </div>
-        </div>
+    <!-- Header Section -->
+    <header class="text-center mb-16 pt-8">
+        <h1 class="text-4xl md:text-6xl font-black neon-text">INTERACTIVE QUEST LOG</h1>
+        <p class="text-xl mt-3 text-gray-400">Portofolio Game JavaScript dan Firebase Real-time</p>
     </header>
 
-    <main>
-        <section id="hero" class="hero-section section">
-            <div class="hero-content">
-                <p class="pre-title">-- INITIATE BOOT SEQUENCE --</p>
-                <h2 class="main-title">LEVEL 1: GAME DEV INITIATE</h2>
-                <a href="#projects" class="btn-quest">START QUEST LOG</a>
-            </div>
-        </section>
-
-        <section id="projects" class="projects-section section">
-            <div class="container">
-                <h2 class="section-title">QUEST LOG: COMPLETED PROJECTS</h2>
-                <div class="project-grid">
-
-                    <div class="project-card" data-project="tictactoe">
-                        <img src="https://files.catbox.moe/z5uqyr.svg" alt="Preview Tic-Tac-Toe">
-                        <div class="card-info">
-                            <h3>Tic-Tac-Toe Classic</h3>
-                            <p>First logic attempt. DOM Manipulation & Game Logic.</p>
-                            <span class="badge badge-js">JS Basic</span>
-                            <span class="badge badge-logic">First Logic</span>
-                        </div>
-                    </div>
-
-                    <div class="project-card" data-project="flappybird">
-                        <img src="https://files.catbox.moe/4sba51.jpg" alt="Preview Flappy Bird">
-                        <div class="card-info">
-                            <h3>Flappy Clone (Canvas)</h3>
-                            <p>Mastering the Canvas API for advanced 2D animation.</p>
-                            <span class="badge badge-canvas">Canvas API</span>
-                            <span class="badge badge-physics">Physics Sim</span>
-                        </div>
-                    </div>
-
-                    </div>
-            </div>
-        </section>
-
-        <section id="contact" class="contact-section section">
-             <div class="container">
-                <h2 class="section-title">FINAL BOSS ENCOUNTER: GET IN TOUCH</h2>
-                <form class="contact-form">
-                    <p>Send me a message to hire or collaborate on a new quest!</p>
-                    <input type="text" placeholder="Your Name/Guild">
-                    <input type="email" placeholder="Your Email Address">
-                    <textarea placeholder="Your Message/Quest Details..."></textarea>
-                    <button type="submit" class="btn-quest">DEPLOY MESSAGE</button>
-                </form>
-            </div>
-        </section>
-
-    </main>
-    
-    <div id="project-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn">&times;</span>
-            <h2 id="modal-title" class="modal-title">Project Name</h2>
-            <p id="modal-description" class="modal-description">Detailed description goes here...</p>
+    <!-- Game Projects Section -->
+    <section id="projects" class="max-w-6xl mx-auto">
+        <h2 class="text-3xl font-bold mb-8 border-b-2 pb-2 inline-block neon-border">PROJECTS (QUESTS COMPLETED)</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             
-            <div class="modal-details">
-                <h4><span class="detail-icon">⚙️</span> Technologies Used:</h4>
-                <ul id="modal-tech-list">
-                    </ul>
-            </div>
+            <!-- Card 1: Tic-Tac-Toe (Sudah Multiplayer) -->
+            <a href="games/tic-tac-toe/index.html" class="project-card block p-6 bg-[#161b22] rounded-lg border-2 neon-border hover:neon-border">
+                <div class="relative h-48 mb-4 overflow-hidden rounded-md">
+                    <img src="https://placehold.co/400x200/273453/ff00ff?text=TIC-TAC-TOE+MULTIPLAYER" alt="Tic Tac Toe Multiplayer Preview" class="w-full h-full object-cover">
+                    <span class="absolute top-2 right-2 bg-green-500 text-black text-xs font-bold px-2 py-1 rounded-full">REAL-TIME</span>
+                </div>
+                <div class="card-content">
+                    <h3 class="text-2xl font-bold mb-2 neon-text">Tic-Tac-Toe Quest</h3>
+                    <p class="text-gray-400">Game klasik X/O yang di-upgrade menjadi multiplayer real-time menggunakan Firebase Firestore untuk *matchmaking* dan sinkronisasi status.</p>
+                    <p class="mt-3 text-sm font-bold text-[#ff00ff]">Reward: Multiplayer Badge, Firebase Mastery</p>
+                </div>
+            </a>
+
+            <!-- Card 2: Flappy Clone (PATH YANG DIPERBAIKI) -->
+            <a href="games/flappy-clone/index.html" class="project-card block p-6 bg-[#161b22] rounded-lg border-2 neon-border hover:neon-border">
+                <div class="relative h-48 mb-4 overflow-hidden rounded-md">
+                    <!-- Menggunakan gambar placeholder yang menarik atau gambar yang telah Anda sebutkan -->
+                    <img src="https://files.catbox.moe/4sba51.jpg" onerror="this.onerror=null;this.src='https://placehold.co/400x200/0d1117/00ffff?text=FLAPPY+CLONE+QUEST';" alt="Flappy Clone Preview" class="w-full h-full object-cover">
+                    <span class="absolute top-2 right-2 bg-yellow-500 text-black text-xs font-bold px-2 py-1 rounded-full">CANVAS API</span>
+                </div>
+                <div class="card-content">
+                    <h3 class="text-2xl font-bold mb-2 neon-text">Flappy Clone Quest</h3>
+                    <p class="text-gray-400">Implementasi game Flappy Bird menggunakan HTML Canvas API murni, menampilkan fisika dasar (gravitasi dan lompatan) serta manajemen *sprites* (gambar/objek).</p>
+                    <p class="mt-3 text-sm font-bold text-[#00ffff]">Reward: Canvas API Badge, Physics Engine</p>
+                </div>
+            </a>
             
-            <a id="modal-play-link" href="#" target="_blank" class="btn-quest modal-btn">PLAY GAME / START QUEST</a>
         </div>
-    </div>
+    </section>
 
-    <script src="assets/js/main.js"></script>
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section mt-16 max-w-xl mx-auto p-8 bg-[#161b22] rounded-lg neon-border">
+        <h2 class="text-3xl font-bold mb-6 text-center neon-text">READY FOR A NEW QUEST?</h2>
+        <p class="text-center text-gray-400 mb-6">Send me a message to hire or collaborate on a new quest!</p>
+        <form action="#" method="POST" class="space-y-4">
+            <input type="text" placeholder="Your Name" class="w-full p-3 bg-[#0d1117] border-2 border-[#3d5a80] rounded-md focus:ring-2 focus:ring-[#00ffff] focus:border-[#00ffff]">
+            <input type="email" placeholder="Your Email" class="w-full p-3 bg-[#0d1117] border-2 border-[#3d5a80] rounded-md focus:ring-2 focus:ring-[#ff00ff] focus:border-[#ff00ff]">
+            <textarea placeholder="Your Message / Quest Brief" rows="4" class="w-full p-3 bg-[#0d1117] border-2 border-[#3d5a80] rounded-md focus:ring-2 focus:ring-[#00ffff] focus:border-[#00ffff]"></textarea>
+            <button type="submit" class="btn-quest p-3 rounded-md">DEPLOY MESSAGE</button>
+        </form>
+    </section>
+
+    <footer class="text-center mt-12 text-sm text-gray-500">
+        <p>&copy; 2024 Interactive Portfolio. All Quests Reserved.</p>
+    </footer>
+
 </body>
 </html>
+```
+eof
+
+Perbaikan telah dilakukan pada baris ini (sekitar baris 49):
+```html
+<a href="games/flappy-clone/index.html" class="project-card block p-6 bg-[#161b22] rounded-lg border-2 neon-border hover:neon-border">
