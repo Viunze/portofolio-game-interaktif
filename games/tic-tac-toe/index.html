@@ -1,31 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tic-Tac-Toe Quest</title>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <title>Tic-Tac-Toe Multiplayer Quest</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="game-container">
-        <h1>TIC-TAC-TOE QUEST</h1>
-        <div id="status" class="status-message">Player X's Turn</div>
-        <div class="board" id="game-board">
-            <div class="cell" data-cell-index="0"></div>
-            <div class="cell" data-cell-index="1"></div>
-            <div class="cell" data-cell-index="2"></div>
-            <div class="cell" data-cell-index="3"></div>
-            <div class="cell" data-cell-index="4"></div>
-            <div class="cell" data-cell-index="5"></div>
-            <div class="cell" data-cell-index="6"></div>
-            <div class="cell" data-cell-index="7"></div>
-            <div class="cell" data-cell-index="8"></div>
+        <h1>TIC-TAC-TOE MULTIPLAYER</h1>
+
+        <!-- Area Input Nama & Mulai -->
+        <div id="setup-area" class="setup-area">
+            <input type="text" id="player-name-input" placeholder="Masukkan Nama Guild/Panggilan">
+            <button id="find-game-btn" class="btn-quest">CARI LAWAN (START QUEST)</button>
         </div>
-        <button id="restart-btn">RESTART GAME</button>
-        <a href="../../index.html" class="back-btn">← Back to Quest Log</a>
+
+        <!-- Area Status Game -->
+        <div id="status-area" class="status-area hidden">
+            <div id="player-info" class="player-info">
+                <p>Anda: <span id="my-symbol">?</span> (<span id="my-name">...</span>)</p>
+                <p>Lawan: <span id="opponent-name">Menunggu...</span></p>
+            </div>
+            <div id="status-message" class="status-message">Menunggu koneksi Firestore...</div>
+        </div>
+
+        <!-- Area Papan Game -->
+        <div class="board-wrapper">
+            <div class="board" id="game-board">
+                <div class="cell" data-cell-index="0"></div>
+                <div class="cell" data-cell-index="1"></div>
+                <div class="cell" data-cell-index="2"></div>
+                <div class="cell" data-cell-index="3"></div>
+                <div class="cell" data-cell-index="4"></div>
+                <div class="cell" data-cell-index="5"></div>
+                <div class="cell" data-cell-index="6"></div>
+                <div class="cell" data-cell-index="7"></div>
+                <div class="cell" data-cell-index="8"></div>
+            </div>
+        </div>
+        
+        <button id="restart-btn" class="hidden">MULAI QUEST BARU</button>
+        
+        <a href="../../index.html" class="back-btn">← Kembali ke Quest Log</a>
     </div>
 
-    <script src="script.js"></script>
+    <!-- Firebase SDK Imports (Perhatikan perubahan: Sekarang hanya mengekspos inisialisasi) -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, collection, query, where, getDocs, setDoc, updateDoc, onSnapshot, runTransaction } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        
+        // Atur log level ke Debug untuk melihat aktivitas Firebase di konsol
+        setLogLevel('Debug');
+        
+        // Variabel global yang disediakan oleh lingkungan Canvas
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        // Inisialisasi Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+        
+        // Autentikasi User (Fungsi ini akan dieksekusi dari script.js)
+        window.authenticateUser = async function(initGameCallback) {
+            try {
+                if (initialAuthToken) {
+                    await signInWithCustomToken(auth, initialAuthToken);
+                } else {
+                    await signInAnonymously(auth);
+                }
+                // Setelah berhasil, panggil callback inisialisasi game dari script.js
+                const userId = auth.currentUser.uid;
+                initGameCallback(db, userId, appId);
+            } catch (error) {
+                console.error("Firebase Auth Error:", error);
+                document.getElementById('status-message').textContent = "ERROR: Gagal terhubung ke server.";
+            }
+        }
+    </script>
+
+    <!-- Script Logika Game - Penting: Ubah menjadi type="module" -->
+    <script src="script.js" type="module"></script>
 </body>
 </html>
