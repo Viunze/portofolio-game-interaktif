@@ -9,7 +9,7 @@
 
 /* Tema Gaming & Dark Mode */
 body {
-    font-family: 'Orbitron', sans-serif; 
+    font-family: 'Orbitron', sans-serif; /* Font utama: Orbitron */
     background-color: #0d1117; 
     color: #e6edf3; 
     line-height: 1.6;
@@ -46,8 +46,9 @@ body {
 }
 
 .logo {
-    font-family: 'Press Start 2P', cursive;
-    font-size: 14px;
+    font-family: 'Orbitron', sans-serif; /* Menggunakan Orbitron */
+    font-size: 1.2em;
+    font-weight: 700; /* Tebal */
     color: #00ffff;
 }
 
@@ -56,6 +57,7 @@ body {
     text-decoration: none;
     margin-left: 25px;
     transition: color 0.3s;
+    font-weight: 500; /* Agak tebal untuk navigasi */
 }
 
 .header-nav a:hover {
@@ -114,12 +116,14 @@ body {
 
 .pre-title {
     color: #ff00ff;
-    font-family: 'Press Start 2P', cursive;
-    font-size: 10px;
+    font-family: 'Orbitron', sans-serif; /* Menggunakan Orbitron */
+    font-size: 0.8em;
+    font-weight: 500;
 }
 
 .main-title {
     font-size: 3em;
+    font-weight: 900; /* Sangat tebal */
     margin: 10px 0 20px;
 }
 
@@ -150,6 +154,7 @@ body {
 
 .section-title {
     font-size: 2.5em;
+    font-weight: 900; /* Sangat tebal */
     margin-bottom: 50px;
     color: #00ffff;
 }
@@ -191,6 +196,7 @@ body {
 .card-info h3 {
     color: #ff00ff;
     margin-bottom: 5px;
+    font-weight: 700; /* Tebal untuk judul kartu */
 }
 
 .badge {
@@ -198,9 +204,10 @@ body {
     padding: 4px 8px;
     margin-right: 5px;
     margin-top: 10px;
-    font-size: 10px;
+    font-size: 0.7em; /* Lebih kecil */
     border-radius: 3px;
-    font-family: 'Press Start 2P', cursive;
+    font-family: 'Orbitron', sans-serif; /* Menggunakan Orbitron */
+    font-weight: 500;
 }
 
 .badge-js { background-color: #f7df1e; color: #0d1117; }
@@ -285,8 +292,9 @@ body {
 .modal-title {
     font-size: 2em;
     color: #ff00ff;
+    font-family: 'Orbitron', sans-serif; /* Menggunakan Orbitron */
+    font-weight: 700;
     margin-bottom: 15px;
-    font-family: 'Press Start 2P', cursive;
 }
 
 .modal-description {
