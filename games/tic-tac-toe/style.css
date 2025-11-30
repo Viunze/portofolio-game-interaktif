@@ -1,0 +1,72 @@
+/* games/tic-tac-toe/style.css */
+body {
+    font-family: 'Press Start 2P', cursive;
+    background-color: #1a1a2e; /* Dark theme for game */
+    color: #e94560;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    flex-direction: column;
+}
+
+.game-container {
+    text-align: center;
+    background: #16213e;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(71, 160, 255, 0.5);
+}
+
+h1 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    color: #00ffff;
+}
+
+.status-message {
+    margin-bottom: 20px;
+    font-size: 0.8em;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 5px;
+    margin-bottom: 20px;
+}
+
+.cell {
+    background-color: #273453;
+    border: 2px solid #3d5a80;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3em;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    user-select: none;
+    color: white;
+}
+
+.cell:hover {
+    background-color: #3d5a80;
+}
+
+#restart-btn {
+    padding: 10px 20px;
+    background-color: #e94560;
+    color: white;
+    border: none;
+    font-family: 'Press Start 2P', cursive;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+.back-btn {
+    color: #00ffff;
+    text-decoration: none;
+    font-size: 0.7em;
+}
