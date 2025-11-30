@@ -4,8 +4,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flappy Clone Quest</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* CSS yang digabungkan dari style.css */
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background-color: #0d1117;
+            color: #e6edf3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            flex-direction: column;
+        }
+
+        .game-wrapper {
+            text-align: center;
+            background: #161b22;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.4); /* Neon Magenta Shadow */
+            max-width: 440px;
+            width: 100%;
+        }
+
+        .header-status {
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-size: 1.5em;
+            font-weight: 900;
+            color: #00ffff;
+            text-shadow: 0 0 5px #00ffff;
+        }
+
+        #gameCanvas {
+            border: 2px solid #ff00ff;
+            background-color: #70c5ce; /* Latar biru muda khas Flappy */
+            display: block;
+            margin: 0 auto 15px;
+            border-radius: 8px;
+            width: 100%;
+            height: auto;
+            max-height: 600px; /* Batasi tinggi agar responsif */
+        }
+        
+        .message-box {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            font-weight: 700;
+            transition: opacity 0.3s;
+        }
+
+        .back-btn {
+            color: #e6edf3;
+            text-decoration: none;
+            font-size: 0.8em;
+            display: inline-block;
+            margin-top: 10px;
+            padding: 5px 10px;
+            border: 1px solid #3d5a80;
+            border-radius: 4px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .back-btn:hover {
+            background-color: #3d5a80;
+            color: #00ffff;
+        }
+    </style>
 </head>
 <body>
     <div class="game-wrapper">
@@ -16,11 +90,231 @@
         
         <canvas id="gameCanvas" width="400" height="600"></canvas>
         
-        <div id="game-message" class="message-box">Tekan Spasi untuk Mulai!</div>
+        <div id="game-message" class="message-box">Tekan Spasi atau Klik untuk Mulai!</div>
         
         <a href="../../index.html" class="back-btn">← Kembali ke Quest Log</a>
     </div>
 
-    <script src="game.js"></script>
+    <script>
+        // Logika Game yang digabungkan dari game.js
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const messageBox = document.getElementById('game-message');
+
+        // Konstanta Game
+        const BIRD_SIZE = 30;
+        const GRAVITY = 0.5;
+        const JUMP_FORCE = -8;
+        const PIPE_WIDTH = 50;
+        const PIPE_GAP = 150;
+        const PIPE_SPEED = 2;
+        const SCORE_INCREMENT = 1;
+
+        // State Game
+        let bird = { x: 50, y: canvas.height / 2, velocity: 0 };
+        let pipes = [];
+        let score = 0;
+        let isGameOver = false;
+        let isGameRunning = false;
+        let gameLoopId;
+
+        // --- DRAWING FUNCTIONS ---
+
+        function drawBird() {
+            ctx.fillStyle = '#ffcc00'; // Kuning Emas
+            ctx.fillRect(bird.x, bird.y, BIRD_SIZE, BIRD_SIZE);
+            // Mata kecil
+            ctx.fillStyle = 'black';
+            ctx.beginPath();
+            ctx.arc(bird.x + BIRD_SIZE * 0.7, bird.y + BIRD_SIZE * 0.3, 2, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        function drawPipe(pipe) {
+            ctx.fillStyle = '#32cd32'; // Hijau Cerah
+            // Pipe Atas
+            ctx.fillRect(pipe.x, 0, PIPE_WIDTH, pipe.top);
+            // Pipe Bawah
+            ctx.fillRect(pipe.x, canvas.height - pipe.bottom, PIPE_WIDTH, pipe.bottom);
+        }
+
+        function drawScore() {
+            ctx.fillStyle = '#e6edf3';
+            ctx.font = '30px Orbitron';
+            ctx.textAlign = 'center';
+            ctx.fillText(score, canvas.width / 2, 50);
+        }
+
+        // --- GAME LOGIC ---
+
+        function updateBird() {
+            bird.velocity += GRAVITY;
+            bird.y += bird.velocity;
+
+            // Batasan atas (tidak bisa terbang melewati langit)
+            if (bird.y < 0) {
+                bird.y = 0;
+                bird.velocity = 0;
+            }
+
+            // Batasan bawah (tabrak tanah = Game Over)
+            if (bird.y + BIRD_SIZE > canvas.height) {
+                bird.y = canvas.height - BIRD_SIZE;
+                gameOver();
+            }
+        }
+
+        function updatePipes() {
+            // Gerakkan pipa
+            for (let i = 0; i < pipes.length; i++) {
+                let pipe = pipes[i];
+                pipe.x -= PIPE_SPEED;
+
+                // Cek tabrakan
+                if (checkCollision(pipe)) {
+                    gameOver();
+                    return;
+                }
+
+                // Cek penambahan skor
+                if (pipe.x + PIPE_WIDTH < bird.x && !pipe.passed) {
+                    score += SCORE_INCREMENT;
+                    pipe.passed = true;
+                }
+            }
+
+            // Hapus pipa yang sudah lewat
+            if (pipes.length > 0 && pipes[0].x < -PIPE_WIDTH) {
+                pipes.shift();
+            }
+            
+            // Cek untuk menghasilkan pipa baru
+            if (pipes.length === 0 || pipes[pipes.length - 1].x < canvas.width - 200) {
+                spawnPipe();
+            }
+        }
+
+        function checkCollision(pipe) {
+            // Tabrakan dengan pipe atas
+            if (bird.x < pipe.x + PIPE_WIDTH &&
+                bird.x + BIRD_SIZE > pipe.x &&
+                bird.y < pipe.top) {
+                return true;
+            }
+
+            // Tabrakan dengan pipe bawah
+            if (bird.x < pipe.x + PIPE_WIDTH &&
+                bird.x + BIRD_SIZE > pipe.x &&
+                bird.y + BIRD_SIZE > canvas.height - pipe.bottom) {
+                return true;
+            }
+
+            return false;
+        }
+
+        function spawnPipe() {
+            const minHeight = 50;
+            const maxHeight = canvas.height - PIPE_GAP - minHeight;
+            const topHeight = Math.floor(Math.random() * (maxHeight - minHeight + 1)) + minHeight;
+            const bottomHeight = canvas.height - topHeight - PIPE_GAP;
+
+            pipes.push({
+                x: canvas.width,
+                top: topHeight,
+                bottom: bottomHeight,
+                passed: false
+            });
+        }
+
+        // --- CONTROL & STATE ---
+
+        function jump() {
+            if (isGameRunning) {
+                bird.velocity = JUMP_FORCE;
+            } else if (!isGameOver) {
+                startGame();
+            }
+        }
+
+        function startGame() {
+            bird = { x: 50, y: canvas.height / 2, velocity: 0 };
+            pipes = [];
+            score = 0;
+            isGameOver = false;
+            isGameRunning = true;
+            messageBox.style.opacity = 0;
+            
+            // Hasilkan pipa pertama
+            spawnPipe();
+            
+            if (gameLoopId) cancelAnimationFrame(gameLoopId);
+            gameLoopId = requestAnimationFrame(gameLoop);
+        }
+
+        function gameOver() {
+            isGameRunning = false;
+            isGameOver = true;
+            messageBox.style.opacity = 1;
+            messageBox.textContent = `GAME OVER! Skor: ${score}. Tekan Spasi atau Klik untuk Coba Lagi.`;
+            cancelAnimationFrame(gameLoopId);
+        }
+
+        function gameLoop() {
+            // 1. Clear Canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#70c5ce';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            if (isGameRunning) {
+                // 2. Update Logic
+                updateBird();
+                updatePipes();
+
+                // 3. Draw Elements
+                pipes.forEach(drawPipe);
+                drawBird();
+                drawScore();
+            } else if (isGameOver) {
+                // Draw terakhir kali
+                pipes.forEach(drawPipe);
+                drawBird();
+                drawScore();
+            }
+
+            if (isGameRunning || isGameOver) {
+                gameLoopId = requestAnimationFrame(gameLoop);
+            }
+        }
+        
+        // --- Event Listeners ---
+        
+        // Handle input (Spasi/Klik)
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') {
+                e.preventDefault(); // Mencegah scrolling
+                if (isGameOver) {
+                    startGame();
+                } else {
+                    jump();
+                }
+            }
+        });
+
+        canvas.addEventListener('click', () => {
+             if (isGameOver) {
+                startGame();
+           } else {
+                jump();
+            }
+        });
+        
+        // Fungsi untuk mengontrol Loop Awal (Initial Load)
+        window.onload = function() {
+            messageBox.textContent = "Tekan Spasi atau Klik untuk Mulai!";
+            // Panggil gameLoop untuk menampilkan UI awal tanpa memulai game
+            gameLoopId = requestAnimationFrame(gameLoop); 
+        };
+
+    </script>
 </body>
 </html>
