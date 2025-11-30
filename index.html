@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Nama Kamu] - Game Dev Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <header class="header-nav">
+        <div class="container">
+            <h1 class="logo">Dev: [Nama Kamu]</h1>
+            <nav>
+                <a href="#hero">Home</a>
+                <a href="#projects">Quest Log</a>
+                <a href="#contact">Final Boss</a>
+            </nav>
+            <div class="exp-bar-container">
+                <span class="exp-label">EXP:</span>
+                <div class="exp-bar">
+                    <div id="progress-bar" class="exp-progress"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="hero-section section">
+            <div class="hero-content">
+                <p class="pre-title">-- INITIATE BOOT SEQUENCE --</p>
+                <h2 class="main-title">LEVEL 1: GAME DEV INITIATE</h2>
+                <a href="#projects" class="btn-quest">START QUEST LOG</a>
+            </div>
+        </section>
+
+        <section id="projects" class="projects-section section">
+            <div class="container">
+                <h2 class="section-title">QUEST LOG: COMPLETED PROJECTS</h2>
+                <div class="project-grid">
+
+                    <div class="project-card" data-project="tictactoe">
+                        <img src="assets/images/tic-tac-toe-preview.png" alt="Preview Tic-Tac-Toe">
+                        <div class="card-info">
+                            <h3>Tic-Tac-Toe Classic</h3>
+                            <p>First logic attempt. Skills used: DOM Manipulation & Game Logic.</p>
+                            <span class="badge badge-js">JS Basic</span>
+                            <span class="badge badge-logic">First Logic</span>
+                        </div>
+                    </div>
+
+                    <div class="project-card" data-project="flappybird">
+                        <img src="assets/images/flappy-bird-preview.png" alt="Preview Flappy Bird">
+                        <div class="card-info">
+                            <h3>Flappy Clone (Canvas)</h3>
+                            <p>Mastering the Canvas API for advanced 2D animation and physics simulation.</p>
+                            <span class="badge badge-canvas">Canvas API</span>
+                            <span class="badge badge-physics">Physics Sim</span>
+                        </div>
+                    </div>
+
+                    </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section section">
+             <div class="container">
+                <h2 class="section-title">FINAL BOSS ENCOUNTER: GET IN TOUCH</h2>
+                <form class="contact-form">
+                    <p>Send me a message to hire or collaborate on a new quest!</p>
+                    <input type="text" placeholder="Your Name/Guild">
+                    <input type="email" placeholder="Your Email Address">
+                    <textarea placeholder="Your Message/Quest Details..."></textarea>
+                    <button type="submit" class="btn-quest">DEPLOY MESSAGE</button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+    
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
