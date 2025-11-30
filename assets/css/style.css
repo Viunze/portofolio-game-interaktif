@@ -1,0 +1,240 @@
+/* assets/css/style.css */
+
+/* Reset Dasar */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Tema Gaming & Dark Mode */
+body {
+    font-family: 'Orbitron', sans-serif; /* Font utama yang modern */
+    background-color: #0d1117; /* Latar Belakang Gelap (Mirip GitHub Dark Mode) */
+    color: #e6edf3; /* Warna Teks Terang */
+    line-height: 1.6;
+    scroll-behavior: smooth;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.section {
+    padding: 100px 0;
+    min-height: 100vh; /* Agar setiap section full-height saat dilihat */
+}
+
+/* --- HEADER & NAVIGASI (EXP BAR) --- */
+.header-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(13, 17, 23, 0.95); /* Semi-transparan */
+    padding: 15px 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 255, 255, 0.2); /* Neon Shadow Tipis */
+}
+
+.header-nav .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: 'Press Start 2P', cursive; /* Font pixel untuk logo */
+    font-size: 14px;
+    color: #00ffff; /* Warna Neon Cyan */
+}
+
+.header-nav a {
+    color: #e6edf3;
+    text-decoration: none;
+    margin-left: 25px;
+    transition: color 0.3s;
+}
+
+.header-nav a:hover {
+    color: #00ffff;
+}
+
+/* EXP Bar Styling */
+.exp-bar-container {
+    display: flex;
+    align-items: center;
+}
+
+.exp-label {
+    font-size: 12px;
+    margin-right: 5px;
+    color: #ff00ff; /* Warna Neon Magenta */
+}
+
+.exp-bar {
+    width: 100px;
+    height: 10px;
+    background-color: #1a202c;
+    border: 1px solid #ff00ff;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.exp-progress {
+    height: 100%;
+    width: 0%; /* Dimulai dari 0% - akan diisi oleh JS */
+    background: linear-gradient(90deg, #ff00ff, #00ffff);
+    transition: width 0.1s ease-out; /* Animasi progress bar */
+}
+
+
+/* --- SECTION HERO (Parallax) --- */
+.hero-section {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    /* Placeholder untuk Parallax: Gunakan gambar background bertema luar angkasa/sci-fi */
+    background-image: url('assets/images/bg-parallax.jpg'); 
+    background-size: cover;
+    background-attachment: fixed; /* Ini Kunci Dasar Parallax */
+    background-position: center;
+}
+
+.hero-content {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 40px;
+    border-radius: 10px;
+    border: 1px solid #00ffff;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+}
+
+.pre-title {
+    color: #ff00ff;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 10px;
+}
+
+.main-title {
+    font-size: 3em;
+    margin: 10px 0 20px;
+}
+
+/* Tombol Dasar (BTN QUEST) */
+.btn-quest {
+    background: #ff00ff;
+    color: #0d1117;
+    padding: 10px 20px;
+    text-decoration: none;
+    border: none;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+.btn-quest:hover {
+    background: #00ffff;
+    box-shadow: 0 0 15px #00ffff;
+}
+
+/* --- SECTION PROJECTS (Kartu Interaktif) --- */
+.projects-section {
+    background-color: #161b22;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 2.5em;
+    margin-bottom: 50px;
+    color: #00ffff;
+}
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.project-card {
+    background: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    
+    /* Setting untuk Efek 3D Ringan */
+    transform-style: preserve-3d;
+}
+
+/* Efek Hover Keren (3D Ringan) */
+.project-card:hover {
+    transform: perspective(1000px) rotateY(5deg) scale(1.05); /* Rotasi dan Zoom */
+    box-shadow: 0 10px 20px rgba(0, 255, 255, 0.4); /* Neon Shadow Saat Hover */
+}
+
+.project-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+}
+
+.card-info {
+    padding: 20px;
+    text-align: left;
+}
+
+.card-info h3 {
+    color: #ff00ff;
+    margin-bottom: 5px;
+}
+
+.badge {
+    display: inline-block;
+    padding: 4px 8px;
+    margin-right: 5px;
+    margin-top: 10px;
+    font-size: 10px;
+    border-radius: 3px;
+    font-family: 'Press Start 2P', cursive;
+}
+
+.badge-js { background-color: #f7df1e; color: #0d1117; }
+.badge-canvas { background-color: #ff7f50; color: #0d1117; }
+.badge-logic { background-color: #00ffff; color: #0d1117; }
+.badge-physics { background-color: #7cfc00; color: #0d1117; }
+
+
+/* --- SECTION CONTACT (Form) --- */
+.contact-section {
+    background-color: #0d1117;
+    text-align: center;
+}
+
+.contact-form {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 30px;
+    background: #161b22;
+    border-radius: 10px;
+    border: 1px solid #ff00ff;
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #30363d;
+    background: #0d1117;
+    color: #e6edf3;
+    border-radius: 5px;
+    font-family: 'Orbitron', sans-serif;
+}
